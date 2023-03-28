@@ -501,7 +501,7 @@ def kernel(casscf, mo_coeff, tol=1e-7, conv_tol_grad=None,
         casscf.dump_chk(locals())
 
     log.timer('1-step CASSCF', *cput0)
-    return conv, e_tot, e_cas, fcivec, mo, mo_energy
+    return conv, imacro, totmicro, totinner, e_tot, e_cas, fcivec, mo, mo_energy
 
 
 def as_scanner(mc):
@@ -835,14 +835,14 @@ To enable the solvent model for CASSCF, the following code needs to be called
         self.check_sanity()
         self.dump_flags()
 
-        self.converged, self.e_tot, self.e_cas, self.ci, \
+        self.converged, self.imacro, self.imicro, self.iinner, self.e_tot, self.e_cas, self.ci, \
                 self.mo_coeff, self.mo_energy = \
                 _kern(self, mo_coeff,
                       tol=self.conv_tol, conv_tol_grad=self.conv_tol_grad,
                       ci0=ci0, callback=callback, verbose=self.verbose)
         logger.note(self, 'CASSCF energy = %.15g', self.e_tot)
         self._finalize()
-        return self.e_tot, self.e_cas, self.ci, self.mo_coeff, self.mo_energy
+        return self.converged, self.e_tot, self.imacro, self.imicro, self.iinner, self.e_cas, self.ci, self.mo_coeff, self.mo_energy
 
     def mc1step(self, mo_coeff=None, ci0=None, callback=None):
         return self.kernel(mo_coeff, ci0, callback)
