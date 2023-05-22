@@ -643,7 +643,7 @@ def kernel(casscf, mo_coeff, tol=1e-7, conv_tol_grad=None,
         casscf.dump_chk(locals())
 
     log.timer('newton CASSCF', *cput0)
-    return conv, e_tot, e_cas, fcivec, mo, mo_energy
+    return conv, imacro, totmicro, totinner, e_tot, e_cas, fcivec, mo, mo_energy
 
 
 class CASSCF(mc1step.CASSCF):
