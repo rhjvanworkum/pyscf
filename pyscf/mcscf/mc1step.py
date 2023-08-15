@@ -835,7 +835,7 @@ To enable the solvent model for CASSCF, the following code needs to be called
         self.check_sanity()
         self.dump_flags()
 
-        self.converged, self.imacro, self.imicro, self.iinner, self.e_tot, self.e_cas, self.ci, \
+        self.converged, self.e_tot, self.imacro, self.imicro, self.iinner, self.e_cas, self.ci, \
                 self.mo_coeff, self.mo_energy = \
                 _kern(self, mo_coeff,
                       tol=self.conv_tol, conv_tol_grad=self.conv_tol_grad,
